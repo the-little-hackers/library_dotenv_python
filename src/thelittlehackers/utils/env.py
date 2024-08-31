@@ -20,6 +20,7 @@
 # CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+from __future__ import annotations
 
 import os
 from os import PathLike
@@ -145,7 +146,7 @@ instantiate a new object from the JSON string representation.
     return value
 
 
-def loadenv(env_path_file_name: str or PathLike) -> bool:
+def loadenv(env_path_file_name: str | PathLike | None = None) -> bool:
     """
     Load environment variables from the local file `.env`.
 
