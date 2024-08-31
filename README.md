@@ -1,6 +1,6 @@
 # The Little Hackers Python GetEnv Library
 Python utility library for accessing and managing environment variables.
 
-This library relies on [`python-dotenv`](https://github.com/theskumar/python-dotenv) to read key-value pairs from a `.env` file, which helps in the development of applications following the [12-factor principles](https://12factor.net/).
+This library utilizes [`python-dotenv`](https://github.com/theskumar/python-dotenv) to load key-value pairs from a `.env` file, supporting the development of applications in alignment with the 12-factor principles.
 
-This library provides a helper function to convert the value of environment variables in the expected data type.
+This library offers a helper function to convert environment variable values to their expected data types.
