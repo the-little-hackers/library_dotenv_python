@@ -17,9 +17,16 @@ from thelittlehackers.constant.entity import EntityStatus
 
 
 loadenv()
+
 consumer_key = getenv('CONSUMER_KEY', is_required=True)
 consumer_secret = getenv('CONSUMER_SECRET', is_required=False)
-last_sync_timestamp = getenv('LAST_SYNC_TIMESTAMP', date_type=DataType.TIMESTAMP, is_required=False)
+
+last_sync_timestamp = getenv(
+    'LAST_SYNC_TIMESTAMP',
+    date_type=DataType.TIMESTAMP, 
+    is_required=False
+)
+
 sync_status = getenv(
     'SYNC_STATUS',
     data_type=DataType.ENUMERATION, 
