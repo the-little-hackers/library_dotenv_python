@@ -22,7 +22,7 @@ consumer_key = getenv('CONSUMER_KEY', is_required=True)
 consumer_secret = getenv('CONSUMER_SECRET', is_required=False)
 
 last_sync_timestamp = getenv(
-    'LAST_SYNC_TIMESTAMP',
+    'LAST_SYNC_TIME',
     date_type=DataType.TIMESTAMP, 
     is_required=False
 )
