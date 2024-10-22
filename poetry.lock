@@ -398,7 +398,7 @@ toml = "^0.10.2"
 
 [package.source]
 type = "git"
-url = "git@github.com:the-little-hackers/library_thelittlehackers-core_python.git"
+url = "https://github.com/the-little-hackers/library_thelittlehackers-core_python.git"
 reference = "HEAD"
 resolved_reference = "5fff91469f63b4d7f09edfd5af20ac0b02a1c237"
 
@@ -441,4 +441,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "cf722910ac1ed1e8cb787147fe9ddf78d99ef97d19cbdcd98c1e230e464df2c1"
+content-hash = "dc3b26e055f563f141470ee85e546936aa6943a1afaf800e84e3094c71ec25f1"
