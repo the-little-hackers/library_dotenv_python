@@ -109,24 +109,6 @@ def getenv(
         argument `is_required` is `True` and the argument `default_value`
         is not passed, the function raises an exception.
 
-    :param enumeration: A Python class inheriting from `Enum`.  The value
-        passed to this function MUST be a member or a string representation
-        of a member of this enumeration.
-
-    :param item_data_type: A member of ``DataType`` that specifies the
-        desired data type of every item of the value (a list).  The
-        argument ``data_type`` MUST be ``DataType.LIST``.
-
-    :param object_class: A Python class used to instantiate a new object
-        from the value (a JSON string representation). The argument
-        ``data_type`` MUST be ``DataType.OBJECT`.  This Python class
-        MUST implement a static method `from_json` that returns an
-        instance of this class providing a JSON expression.
-
-If this argument ``object_class`` is not defined, while the argument
-`data_type` is `object`, the function uses the class `Object` to
-instantiate a new object from the JSON string representation.
-
 
     :return: The value of the environment variable converted to the
         desired data type.
