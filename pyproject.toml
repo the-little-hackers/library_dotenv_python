@@ -20,9 +20,8 @@ repository = "https://github.com/the-little-hackers/library_dotenv_python"
 version = "1.0.5"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12"
 python-dotenv = "^1.0.0"
-#thelitthelittlehackers-core = {git = "git@github.com:the-little-hackers/library_thelittlehackers-core_python.git"}
 thelittlehackers-core = {git = "https://github.com/the-little-hackers/library_thelittlehackers-core_python.git"}
 
 [tool.poetry.group.dev.dependencies]
