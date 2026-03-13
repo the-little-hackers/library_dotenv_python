@@ -48,9 +48,9 @@ python-dotenv = "^1.0.0"
 thelittlehackers-core = {git = "https://github.com/the-little-hackers/library_thelittlehackers-core_python.git"}
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.8.0"
-flake8 = "^7.1.1"
-setuptools = "^74.0.0"
+black = "^26.3.1"
+flake8 = "^7.3.0"
+setuptools = "^82.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
