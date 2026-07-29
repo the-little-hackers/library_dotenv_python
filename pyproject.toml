@@ -50,7 +50,7 @@ thelittlehackers-core = {git = "https://github.com/the-little-hackers/library_th
 [tool.poetry.group.dev.dependencies]
 black = "^26.3.1"
 flake8 = "^7.3.0"
-setuptools = "^82.0.1"
+setuptools = ">=83.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
