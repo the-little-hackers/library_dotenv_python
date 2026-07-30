@@ -80,7 +80,7 @@ def __cast_value(
     """
     if (
         data_type is DataType.ENUMERATION
-        and "enumeration" not in kwargs
+        and 'enumeration' not in kwargs
     ):
         if isinstance(value, StrEnum):
             kwargs['enumeration'] = type(value)
@@ -137,6 +137,13 @@ def getenv(
 
     :raise Error: If the environment variable doesn't exist.
     """
+    if (
+        data_type is DataType.ENUMERATION
+        and enumeration is None
+        and isinstance(default_value, StrEnum)
+    ):
+        enumeration = type(default_value)
+
     if enumeration is not None:
         kwargs['enumeration'] = enumeration
 
