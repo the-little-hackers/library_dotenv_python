@@ -74,8 +74,11 @@ def __cast_value(
     :raise TypeError: If the argument `value` is not a valid string
         representation of the desired data type.
     """
-    if data_type not in DataType:
-        raise ValueError("The argument 'data_type' MUST be an item of the enumeration 'DataType'")
+    if not isinstance(data_type, DataType):
+        raise TypeError(
+            "'data_type' must be an instance of DataType, got "
+            f"{data_type!r} ({type(data_type).__name__})"
+        )
 
     converter = DATA_TYPE_CONVERTERS.get(data_type)
     if converter is None:
