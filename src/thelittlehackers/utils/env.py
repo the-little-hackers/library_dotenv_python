@@ -24,14 +24,16 @@
 from __future__ import annotations
 
 import os
-from enum import Enum
 from enum import StrEnum
 from os import PathLike
 from typing import Any
+from typing import TypeVar
 
 import dotenv
 from thelittlehackers.constants.data_type import DataType
 from thelittlehackers.utils.string_utils import DATA_TYPE_CONVERTERS
+
+E = TypeVar('E', bound=StrEnum)
 
 
 def __cast_value(
@@ -80,7 +82,7 @@ def __cast_value(
         data_type is DataType.ENUMERATION
         and "enumeration" not in kwargs
     ):
-        if isinstance(value, Enum):
+        if isinstance(value, StrEnum):
             kwargs['enumeration'] = type(value)
         else:
             raise ValueError(
@@ -102,6 +104,8 @@ def getenv(
         data_type: DataType = DataType.STRING,
         default_value: Any = None,
         is_required: bool = True,
+        *,
+        enumeration: type[E] | None = None,
         **kwargs
 ) -> Any:
     """
@@ -121,6 +125,11 @@ def getenv(
         argument `is_required` is `True` and the argument `default_value`
         is not passed, the function raises an exception.
 
+    :param enumeration: Enumeration class used when ``data_type`` is
+        ``DataType.ENUMERATION``.
+
+    :param kwargs: Additional keyword arguments forwarded to the converter.
+
 
     :return: The value of the environment variable converted to the
         desired data type.
@@ -128,16 +137,24 @@ def getenv(
 
     :raise Error: If the environment variable doesn't exist.
     """
+    if enumeration is not None:
+        kwargs['enumeration'] = enumeration
+
     value = os.getenv(name)
 
-    if value:
-        value = __cast_value(value, data_type=data_type, **kwargs)
-    elif default_value is not None:
-        value = __cast_value(default_value, data_type=data_type, **kwargs)
-    elif is_required:
-        raise Exception(f"The environment variable \"{name}\" is not defined")
 
-    return value
+    if value is not None:
+        return __cast_value(value, data_type=data_type, **kwargs)
+
+    if default_value is not None:
+        return __cast_value(default_value, data_type=data_type, **kwargs)
+
+    if is_required:
+        raise Exception(
+            f"The environment variable '{name}' is not defined."
+        )
+
+    return None
 
 
 def loadenv(env_path_file_name: str | PathLike | None = None) -> bool:
