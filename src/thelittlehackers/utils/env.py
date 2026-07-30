@@ -24,6 +24,7 @@
 from __future__ import annotations
 
 import os
+from enum import StrEnum
 from os import PathLike
 from typing import Any
 
@@ -74,11 +75,17 @@ def __cast_value(
     :raise TypeError: If the argument `value` is not a valid string
         representation of the desired data type.
     """
-    if not isinstance(data_type, DataType):
-        raise TypeError(
-            "'data_type' must be an instance of DataType, got "
-            f"{data_type!r} ({type(data_type).__name__})"
-        )
+    if (
+        data_type is DataType.ENUMERATION
+        and "enumeration" not in kwargs
+    ):
+        if isinstance(value, StrEnum):
+            kwargs['enumeration'] = type(value)
+        else:
+            raise ValueError(
+                "'enumeration' must be specified when converting a string to an "
+                "enumeration."
+            )
 
     converter = DATA_TYPE_CONVERTERS.get(data_type)
     if converter is None:
