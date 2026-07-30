@@ -24,6 +24,7 @@
 from __future__ import annotations
 
 import os
+from enum import Enum
 from enum import StrEnum
 from os import PathLike
 from typing import Any
@@ -79,7 +80,7 @@ def __cast_value(
         data_type is DataType.ENUMERATION
         and "enumeration" not in kwargs
     ):
-        if isinstance(value, StrEnum):
+        if isinstance(value, Enum):
             kwargs['enumeration'] = type(value)
         else:
             raise ValueError(
