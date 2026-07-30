@@ -681,10 +681,10 @@ develop = false
 
 [package.dependencies]
 loguru = "^0.7.3"
-normality = "^2.5.0"
-phonenumbers = "^9.0.18"
-pydantic = "^2.12.5"
-python-dateutil = "^2.9.0.post0"
+normality = "^2.6.1"
+phonenumbers = "^9.0.35"
+pydantic = "^2.13.4"
+python-dateutil = "^2.9.0"
 toml = "^0.10.2"
 unidecode = "^1.4.0"
 
@@ -692,7 +692,7 @@ unidecode = "^1.4.0"
 type = "git"
 url = "https://github.com/the-little-hackers/library_thelittlehackers-core_python.git"
 reference = "HEAD"
-resolved_reference = "7a1b16540450b13705ba24d81774c3e474dfbbbb"
+resolved_reference = "9c9dd5690e4e54a066830ac543e538ed1ed9c1cb"
 
 [[package]]
 name = "toml"
