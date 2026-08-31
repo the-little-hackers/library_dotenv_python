@@ -149,9 +149,11 @@ def getenv(
 
     value = os.getenv(name)
 
-
     if value is not None:
-        return __cast_value(value, data_type=data_type, **kwargs)
+        return (
+            value if data_type is DataType.STRING
+            else __cast_value(value, data_type=data_type, **kwargs)
+        )
 
     if default_value is not None:
         return __cast_value(default_value, data_type=data_type, **kwargs)
