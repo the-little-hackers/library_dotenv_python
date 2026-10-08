@@ -21,31 +21,38 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+[project]
+name = "thelittlehackers-dotenv"
+version = "1.0.6"
+description = "Python library helper for reading environment variables"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.md"]
+authors = [
+    { name = "Daniel CAUNE", email = "daniel.caune@thelittlehackers.com" },
+]
+keywords = ["env", "library", "thelittlehackers"]
+requires-python = ">=3.12,<4.0"
+dependencies = [
+    "python-dotenv (>=1.0.0,<2.0.0)",
+    "thelittlehackers-core @ git+https://github.com/the-little-hackers/library_thelittlehackers-core_python.git",
+]
+dynamic = ["classifiers"]
+
+[project.urls]
+Repository = "https://github.com/the-little-hackers/library_dotenv_python"
+
 [tool.poetry]
-authors = ["Daniel CAUNE <daniel.caune@thelittlehackers.com>"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Topic :: Software Development :: Libraries",
 ]
-description = "Python library helper for reading environment variables"
 include = [
-    "CHANGELOG.md"
+    "CHANGELOG.md",
 ]
-keywords = ["env", "library", "thelittlehackers"]
-license = "MIT License"
-name = "thelittlehackers-dotenv"
 packages = [{ include = "thelittlehackers", from = "src" }]
-readme = "README.md"
-repository = "https://github.com/the-little-hackers/library_dotenv_python"
-version = "1.0.6"
-
-[tool.poetry.dependencies]
-python = ">=3.12,<4.0"
-python-dotenv = "^1.0.0"
-thelittlehackers-core = {git = "https://github.com/the-little-hackers/library_thelittlehackers-core_python.git"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^26.3.1"
@@ -53,5 +60,5 @@ flake8 = "^7.3.0"
 setuptools = ">=83.0.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=2.2.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
