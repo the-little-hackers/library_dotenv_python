@@ -23,14 +23,20 @@
 
 from __future__ import annotations
 
+import datetime
 import os
 from enum import StrEnum
 from os import PathLike
 from typing import Any
+from typing import Literal
 from typing import TypeVar
+from typing import overload
+from uuid import UUID
 
 import dotenv
 from thelittlehackers.constants.data_type import DataType
+from thelittlehackers.models.locale import Locale
+from thelittlehackers.models.version import Version
 from thelittlehackers.utils.string_utils import DATA_TYPE_CONVERTERS
 
 E = TypeVar('E', bound=StrEnum)
@@ -99,14 +105,499 @@ def __cast_value(
     return value
 
 
+# @note: The overloads below give the return type of `getenv` from the
+#     data type that is requested, so that the caller doesn't get `Any`.
+#     The value is never `None` when the environment variable is required
+#     or when a default value is passed; otherwise it may be `None`.
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.STRING],
+        default_value: str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> str:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.STRING] = DataType.STRING,
+        *,
+        default_value: str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> str:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.STRING] = DataType.STRING,
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> str:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.STRING] = DataType.STRING,
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> str | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.BOOLEAN],
+        default_value: bool | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> bool:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.BOOLEAN],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> bool:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.BOOLEAN],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> bool | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.DATE],
+        default_value: datetime.date | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> datetime.date:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.DATE],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> datetime.date:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.DATE],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> datetime.date | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.DECIMAL],
+        default_value: float | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> float:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.DECIMAL],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> float:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.DECIMAL],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> float | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.EMAIL_ADDRESS],
+        default_value: str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> str:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.EMAIL_ADDRESS],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> str:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.EMAIL_ADDRESS],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> str | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.INTEGER],
+        default_value: int | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> int:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.INTEGER],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> int:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.INTEGER],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> int | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.IPV4],
+        default_value: tuple[int, int, int, int] | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> tuple[int, int, int, int]:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.IPV4],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> tuple[int, int, int, int]:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.IPV4],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> tuple[int, int, int, int] | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.LOCALE],
+        default_value: Locale | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> Locale:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.LOCALE],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> Locale:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.LOCALE],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> Locale | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.MAC_ADDRESS],
+        default_value: tuple[str, str, str, str, str, str] | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> tuple[str, str, str, str, str, str]:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.MAC_ADDRESS],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> tuple[str, str, str, str, str, str]:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.MAC_ADDRESS],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> tuple[str, str, str, str, str, str] | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.TIME],
+        default_value: datetime.time | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> datetime.time:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.TIME],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> datetime.time:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.TIME],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> datetime.time | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.TIMESTAMP],
+        default_value: datetime.datetime | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> datetime.datetime:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.TIMESTAMP],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> datetime.datetime:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.TIMESTAMP],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> datetime.datetime | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.UUID],
+        default_value: UUID | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> UUID:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.UUID],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> UUID:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.UUID],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> UUID | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.VERSION],
+        default_value: Version | str,
+        is_required: bool = True,
+        **kwargs: Any
+) -> Version:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.VERSION],
+        default_value: None = None,
+        is_required: Literal[True] = True,
+        **kwargs: Any
+) -> Version:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.VERSION],
+        default_value: None = None,
+        is_required: bool = True,
+        **kwargs: Any
+) -> Version | None:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.ENUMERATION],
+        default_value: E,
+        is_required: bool = True,
+        *,
+        enumeration: type[E] | None = None,
+        **kwargs: Any
+) -> E:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.ENUMERATION],
+        default_value: str | None = None,
+        is_required: Literal[True] = True,
+        *,
+        enumeration: type[E],
+        **kwargs: Any
+) -> E:
+    ...
+
+
+@overload
+def getenv(
+        name: str,
+        data_type: Literal[DataType.ENUMERATION],
+        default_value: str | None = None,
+        is_required: bool = True,
+        *,
+        enumeration: type[E],
+        **kwargs: Any
+) -> E | None:
+    ...
+
+
 def getenv(
         name: str,
         data_type: DataType = DataType.STRING,
         default_value: Any = None,
         is_required: bool = True,
         *,
-        enumeration: type[E] | None = None,
-        **kwargs
+        enumeration: type[StrEnum] | None = None,
+        **kwargs: Any
 ) -> Any:
     """
     Return the value of an environment variable.
@@ -132,10 +623,14 @@ def getenv(
 
 
     :return: The value of the environment variable converted to the
-        desired data type.
+        desired data type, or `None` if the environment variable is not
+        defined (or empty, for a data type other than `DataType.STRING`)
+        while `is_required` is `False` and no default value is passed.
 
 
-    :raise Error: If the environment variable doesn't exist.
+    :raise Exception: If the environment variable is not defined (or
+        empty, for a data type other than `DataType.STRING`) while
+        `is_required` is `True` and no default value is passed.
     """
     if (
         data_type is DataType.ENUMERATION
@@ -150,10 +645,14 @@ def getenv(
     value = os.getenv(name)
 
     if value is not None:
-        return (
-            value if data_type is DataType.STRING
-            else __cast_value(value, data_type=data_type, **kwargs)
-        )
+        if data_type is DataType.STRING:
+            return value
+
+        # An empty value can't be converted to another data type: it is
+        # handled as if the environment variable were not defined.
+        cast_value = __cast_value(value, data_type=data_type, **kwargs)
+        if cast_value is not None:
+            return cast_value
 
     if default_value is not None:
         return __cast_value(default_value, data_type=data_type, **kwargs)
