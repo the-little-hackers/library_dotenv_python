@@ -529,7 +529,7 @@ files = [
 
 [[package]]
 name = "thelittlehackers-core"
-version = "1.4.2"
+version = "1.4.3"
 description = "Collection of reusable Python components to share with Python projects"
 optional = false
 python-versions = ">=3.12,<4.0"
@@ -549,7 +549,7 @@ toml = ">=0.10.2,<0.11.0"
 type = "git"
 url = "https://github.com/the-little-hackers/library_thelittlehackers-core_python.git"
 reference = "HEAD"
-resolved_reference = "b2eeb9483d13bb68bcf5e905c3bddc85eef03cb3"
+resolved_reference = "4ce08bb56bb74dde549be25f9fbf81f02d8f3c17"
 
 [[package]]
 name = "toml"
